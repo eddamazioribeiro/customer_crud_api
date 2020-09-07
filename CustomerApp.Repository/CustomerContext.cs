@@ -6,6 +6,8 @@ namespace CustomerApp.Repository
     public class CustomerContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
+
         public CustomerContext(DbContextOptions<CustomerContext> options) : base(options)
         {
 
