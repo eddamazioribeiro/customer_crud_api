@@ -3,12 +3,12 @@ using CustomerApp.Domain.Model;
 
 namespace CustomerApp.Repository
 {
-    public class CustomerContext : DbContext
+    public class Context : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Address> Addresses { get; set; }
 
-        public CustomerContext(DbContextOptions<CustomerContext> options) : base(options)
+        public Context(DbContextOptions<Context> options) : base(options)
         {
 
         }

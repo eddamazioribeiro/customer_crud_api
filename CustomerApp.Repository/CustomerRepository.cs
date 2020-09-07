@@ -17,17 +17,17 @@ namespace CustomerApp.Repository
 
         public void Create(Customer customer)
         {
-            _context.Add(customer);
+            _context.Customers.Add(customer);
         }
 
         public void Update(Customer customer)
         {
-            _context.Update(customer);
+            _context.Customers.Update(customer);
         }
 
         public void Delete(Customer customer)
         {
-            _context.Remove(customer);
+            _context.Customers.Remove(customer);
         }
 
         public async Task<bool> SaveChangesAsync()
