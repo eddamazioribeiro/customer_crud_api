@@ -31,6 +31,7 @@ namespace CustomerApp.WebAPI
             (
                 opt => opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
             );
+            services.AddScoped<CustomerRepository>();
             services.AddControllers();
         }
 
