@@ -8,9 +8,9 @@ namespace CustomerApp.Repository
 {
     public class CustomerRepository
     {
-        private readonly CustomerContext _context;
+        private readonly Context _context;
 
-        public CustomerRepository(CustomerContext context)
+        public CustomerRepository(Context context)
         {
             _context = context;
         }
