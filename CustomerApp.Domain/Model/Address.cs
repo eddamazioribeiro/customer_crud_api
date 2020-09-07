@@ -1,4 +1,4 @@
-namespace Customer.Domain.Model
+namespace CustomerApp.Domain.Model
 {
     public class Address
     {

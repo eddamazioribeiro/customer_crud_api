@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Domain", "Customer.Domain\Customer.Domain.csproj", "{281DCB4A-AFE5-462E-B969-5BA83F604D39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApp.Domain", "CustomerApp.Domain\CustomerApp.Domain.csproj", "{281DCB4A-AFE5-462E-B969-5BA83F604D39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.Repository", "Customer.Repository\Customer.Repository.csproj", "{8C53E1E8-7D45-4F81-B540-79D88C9EAAB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApp.Repository", "CustomerApp.Repository\CustomerApp.Repository.csproj", "{8C53E1E8-7D45-4F81-B540-79D88C9EAAB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Customer.WebAPI", "Customer.WebAPI\Customer.WebAPI.csproj", "{38FD0EE0-3AAE-43D5-A0B5-F784E81AD2D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomerApp.WebAPI", "CustomerApp.WebAPI\CustomerApp.WebAPI.csproj", "{38FD0EE0-3AAE-43D5-A0B5-F784E81AD2D5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

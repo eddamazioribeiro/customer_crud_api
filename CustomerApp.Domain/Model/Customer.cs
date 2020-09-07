@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Customer.Domain.Model
+namespace CustomerApp.Domain.Model
 {
     public class Customer
     {

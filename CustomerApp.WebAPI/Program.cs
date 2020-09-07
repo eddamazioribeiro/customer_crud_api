@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace Customer.WebAPI
+namespace CustomerApp.WebAPI
 {
     public class Program
     {
