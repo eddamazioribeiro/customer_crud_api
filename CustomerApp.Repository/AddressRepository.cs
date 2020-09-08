@@ -39,7 +39,7 @@ namespace CustomerApp.Repository
         {
             IQueryable<Address> query = _context.Addresses;
 
-            query.Where(a => a.Id == id);
+            query = query.Where(a => a.Id == id);
 
             return await query.FirstOrDefaultAsync<Address>();
         }
@@ -51,7 +51,7 @@ namespace CustomerApp.Repository
 
             if(customerId != null && customerId != 0)
             {
-                query.Where(a => a.CustomerId == customerId);
+                query = query.Where(a => a.CustomerId == customerId);
             }
 
             addresses = await query.ToListAsync<Address>();

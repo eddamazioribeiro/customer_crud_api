@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using CustomerApp.Domain.Model;
 using CustomerApp.Repository;
@@ -22,6 +23,8 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
+                customer.CreatedAt = DateTime.Now;
+
                 _repo.Create(customer);
 
                 if (await _repo.SaveChangesAsync())
@@ -42,18 +45,23 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var customerAux = await _repo.GetCustomerById(customerId, false);
+                var exists = await _repo.GetCustomerById(customerId);
 
-                if (customerAux == null)
+                if (!exists)
                 {
                     return NotFound();
                 }
-
-                _repo.Update(customer);
-
-                if (await _repo.SaveChangesAsync())
+                else
                 {
-                    return Created($"api/[controller]/{customer.Id}", customer);
+                    customer.UpdatedAt = DateTime.Now;
+                    
+                    _repo.Update(customer);
+
+                    if (await _repo.SaveChangesAsync())
+                    {
+                        // return Created($"api/[controller]/{customerAux.Id}", customerAux);
+                        return Ok(customer);
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -69,8 +77,7 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var customerAux = await _repo.GetCustomerById(customerId);
-
+                var customerAux = await _repo.GetCustomerById(customerId, false);
 
                 if (customerAux == null)
                 {
@@ -92,12 +99,6 @@ namespace CustomerApp.WebAPI.Controllers
             }
 
             return BadRequest("Não foi possível excluir as informações");
-        }
-
-        [HttpGet("test/{id}")]
-        public IActionResult Get(int id)
-        {
-            return Ok(id);
         }
 
         [HttpGet("{customerId}")]

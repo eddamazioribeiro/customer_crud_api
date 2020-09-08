@@ -22,6 +22,7 @@ namespace CustomerApp.Repository
 
         public void Update(Customer customer)
         {
+            _context.Entry(customer).State = EntityState.Modified;
             _context.Customers.Update(customer);
         }
 
@@ -39,15 +40,26 @@ namespace CustomerApp.Repository
         {
             IQueryable<Customer> query = _context.Customers;
 
-            query.Where(c => c.Id == id);
-
             if(getAddresses)
             {
-                query.Include(c => c.Addresses);
+                query = query.Include(c => c.Addresses);
             }
+
+            query = query.Where(c => c.Id == id);
 
             return await query.FirstOrDefaultAsync<Customer>();
         }
+
+        public async Task<bool> GetCustomerById(int id)
+        {
+            IQueryable<Customer> query = _context.Customers;
+
+            query = query.Where(c => c.Id == id);
+            var exists = await query.FirstOrDefaultAsync<Customer>();
+            _context.Entry(exists).State = EntityState.Detached;
+
+            return exists != null ? true : false;
+        }        
 
         public async Task<List<Customer>> GetAllCustomersByNameAsync(string name, bool getAddresses = false)
         {
@@ -56,10 +68,10 @@ namespace CustomerApp.Repository
 
             if(getAddresses)
             {
-                query.Include(c => c.Addresses);
+                query = query.Include(c => c.Addresses);
             }
 
-            query.Where(c => c.Name.ToLower().Contains(name.ToLower()));
+            query = query.Where(c => c.Name.ToLower().Contains(name.ToLower()));
 
             customers = await query.ToListAsync<Customer>();
 
