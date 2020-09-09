@@ -24,6 +24,7 @@ namespace CustomerApp.WebAPI.Controllers
             try
             {
                 address.CustomerId = customerId;
+                address.CreatedAt = DateTime.Now;
 
                 _repo.Create(address);
 
@@ -53,6 +54,7 @@ namespace CustomerApp.WebAPI.Controllers
                 }
                 else
                 {
+                    address.UpdatedAt = DateTime.Now;
                     _repo.Update(address);
 
                     if (await _repo.SaveChangesAsync())

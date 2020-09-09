@@ -1,3 +1,5 @@
+using System;
+
 namespace CustomerApp.Domain.Model
 {
     public class Address
@@ -9,6 +11,8 @@ namespace CustomerApp.Domain.Model
         public string ZipCode { get; set; }
         public string Complement { get; set; }
         public bool MainAddress { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }        
         public int CustomerId { get; set; }
                 
         public Address()
