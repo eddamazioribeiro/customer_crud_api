@@ -22,6 +22,7 @@ namespace CustomerApp.Repository
 
         public void Update(Address address)
         {
+            _context.Entry(address).State = EntityState.Modified;
             _context.Addresses.Update(address);
         }
 
@@ -35,7 +36,7 @@ namespace CustomerApp.Repository
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public async Task<Address> GetAddressById(int id)
+        public async Task<Address> GetAddressByIdAsync(int id)
         {
             IQueryable<Address> query = _context.Addresses;
 
@@ -44,7 +45,18 @@ namespace CustomerApp.Repository
             return await query.FirstOrDefaultAsync<Address>();
         }
 
-        public async Task<List<Address>> GetAllAddresses(int? customerId)
+        public async Task<bool> CheckIfAddressExistsAsync(int id)
+        {
+            IQueryable<Address> query = _context.Addresses;
+
+            query = query.Where(a => a.Id == id);
+            var exists = await query.FirstOrDefaultAsync<Address>();
+            _context.Entry(exists).State = EntityState.Detached;
+
+            return exists != null ? true : false;
+        }        
+
+        public async Task<List<Address>> GetAllAddressesAsync(int? customerId)
         {
             List<Address> addresses = new List<Address>();
             IQueryable<Address> query = _context.Addresses;

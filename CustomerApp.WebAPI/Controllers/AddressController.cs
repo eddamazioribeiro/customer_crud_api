@@ -45,18 +45,20 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var addressAux = await _repo.GetAddressById(addressId);
+                var exists = await _repo.CheckIfAddressExistsAsync(addressId);
 
-                if (addressAux == null)
+                if (!exists)
                 {
                     return NotFound();
                 }
-                
-                _repo.Update(address);
-
-                if (await _repo.SaveChangesAsync())
+                else
                 {
-                    return Ok();
+                    _repo.Update(address);
+
+                    if (await _repo.SaveChangesAsync())
+                    {
+                        return Ok();
+                    }
                 }
             }
             catch (System.Exception ex)
@@ -72,7 +74,7 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var addressAux = await _repo.GetAddressById(addressId);
+                var addressAux = await _repo.GetAddressByIdAsync(addressId);
 
 
                 if (addressAux == null)
@@ -98,11 +100,11 @@ namespace CustomerApp.WebAPI.Controllers
         }
 
         [HttpGet("{addressId}")]
-        public async Task<IActionResult> GetAddressById(int addressId)
+        public async Task<IActionResult> GetAddressByIdAsync(int addressId)
         {
             try
             {
-                var address = await _repo.GetAddressById(addressId);
+                var address = await _repo.GetAddressByIdAsync(addressId);
 
                 return Ok(address);
             }
@@ -112,12 +114,12 @@ namespace CustomerApp.WebAPI.Controllers
             }
         }
 
-        [HttpGet("list/{customerId}")]
-        public async Task<IActionResult> ListAllAddresses(int? customerId)
+        [HttpGet("customer/list/{customerId?}")]
+        public async Task<IActionResult> ListAllAddressesAsync(int? customerId)
         {
             try
             {
-                var addresses = await _repo.GetAllAddresses(customerId);
+                var addresses = await _repo.GetAllAddressesAsync(customerId);
 
                 return Ok(addresses);
             }

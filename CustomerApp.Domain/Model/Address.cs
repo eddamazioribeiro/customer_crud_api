@@ -10,7 +10,6 @@ namespace CustomerApp.Domain.Model
         public string Complement { get; set; }
         public bool MainAddress { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
                 
         public Address()
         {

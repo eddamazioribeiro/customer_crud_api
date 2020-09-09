@@ -45,7 +45,7 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var exists = await _repo.GetCustomerById(customerId);
+                var exists = await _repo.GetCustomerByIdAsync(customerId);
 
                 if (!exists)
                 {
@@ -59,8 +59,7 @@ namespace CustomerApp.WebAPI.Controllers
 
                     if (await _repo.SaveChangesAsync())
                     {
-                        // return Created($"api/[controller]/{customerAux.Id}", customerAux);
-                        return Ok(customer);
+                        return Created($"api/[controller]/{customer.Id}", customer);
                     }
                 }
             }
@@ -77,7 +76,7 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var customerAux = await _repo.GetCustomerById(customerId, false);
+                var customerAux = await _repo.GetCustomerByIdAsync(customerId, false);
 
                 if (customerAux == null)
                 {
@@ -102,11 +101,11 @@ namespace CustomerApp.WebAPI.Controllers
         }
 
         [HttpGet("{customerId}")]
-        public async Task<IActionResult> GetCustomerById(int customerId)
+        public async Task<IActionResult> GetCustomerByIdAsync(int customerId)
         {
             try
             {
-                var customer = await _repo.GetCustomerById(customerId, true);
+                var customer = await _repo.GetCustomerByIdAsync(customerId, true);
 
                 return Ok(customer);
             }
@@ -117,7 +116,7 @@ namespace CustomerApp.WebAPI.Controllers
         }
 
         [HttpGet("search/{name}")]
-        public async Task<IActionResult> GetCustomersByName(string name)
+        public async Task<IActionResult> GetCustomersByNameAsync(string name)
         {
             try
             {
@@ -132,7 +131,7 @@ namespace CustomerApp.WebAPI.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<IActionResult> ListAllCustomers()
+        public async Task<IActionResult> ListAllCustomersAsync()
         {
             try
             {

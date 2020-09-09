@@ -36,7 +36,7 @@ namespace CustomerApp.Repository
             return (await _context.SaveChangesAsync()) > 0;
         }
 
-        public async Task<Customer> GetCustomerById(int id, bool getAddresses = false)
+        public async Task<Customer> GetCustomerByIdAsync(int id, bool getAddresses = false)
         {
             IQueryable<Customer> query = _context.Customers;
 
@@ -50,7 +50,7 @@ namespace CustomerApp.Repository
             return await query.FirstOrDefaultAsync<Customer>();
         }
 
-        public async Task<bool> GetCustomerById(int id)
+        public async Task<bool> GetCustomerByIdAsync(int id)
         {
             IQueryable<Customer> query = _context.Customers;
 
