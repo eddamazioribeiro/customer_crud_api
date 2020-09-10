@@ -30,7 +30,7 @@ namespace CustomerApp.WebAPI.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Ok();
+                    return Ok(address);
                 }
             }
             catch (System.Exception ex)
@@ -46,20 +46,27 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var exists = await _repo.CheckIfAddressExistsAsync(addressId);
+                var addressAux = await _repo.GetAddressByIdAsync(addressId);
 
-                if (!exists)
+                if (addressAux == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    address.UpdatedAt = DateTime.Now;
-                    _repo.Update(address);
+                    addressAux.Street = address.Street;
+                    addressAux.Number = address.Number;
+                    addressAux.ZipCode = address.ZipCode;
+                    addressAux.Complement = address.Complement;
+                    addressAux.City = address.City;
+                    addressAux.MainAddress = address.MainAddress;
+                    addressAux.UpdatedAt = DateTime.Now;
+
+                    _repo.Update(addressAux);
 
                     if (await _repo.SaveChangesAsync())
                     {
-                        return Ok();
+                        return Ok(addressAux);
                     }
                 }
             }

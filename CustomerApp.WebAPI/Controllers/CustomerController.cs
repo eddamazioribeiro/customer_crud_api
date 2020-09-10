@@ -45,21 +45,23 @@ namespace CustomerApp.WebAPI.Controllers
         {
             try
             {
-                var exists = await _repo.GetCustomerByIdAsync(customerId);
+                var customerAux = await _repo.GetCustomerByIdAsync(customerId, false);
 
-                if (!exists)
+                if (customerAux == null)
                 {
                     return NotFound();
                 }
                 else
                 {
-                    customer.UpdatedAt = DateTime.Now;
+                    customerAux.Name = customer.Name;
+                    customerAux.EMail = customer.EMail;
+                    customerAux.UpdatedAt = DateTime.Now;
                     
-                    _repo.Update(customer);
+                    _repo.Update(customerAux);
 
                     if (await _repo.SaveChangesAsync())
                     {
-                        return Created($"api/[controller]/{customer.Id}", customer);
+                        return Created($"api/[controller]/{customerAux.Id}", customerAux);
                     }
                 }
             }
