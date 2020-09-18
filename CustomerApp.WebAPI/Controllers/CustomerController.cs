@@ -55,6 +55,7 @@ namespace CustomerApp.WebAPI.Controllers
                 {
                     customerAux.Name = customer.Name;
                     customerAux.EMail = customer.EMail;
+                    customerAux.BirthDate = customer.BirthDate;
                     customerAux.UpdatedAt = DateTime.Now;
                     
                     _repo.Update(customerAux);
