@@ -3,14 +3,16 @@ using System;
 using CustomerApp.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CustomerApp.Repository.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class CustomerContextModelSnapshot : ModelSnapshot
+    [Migration("20200918015043_addedBirthDateToCustomer")]
+    partial class addedBirthDateToCustomer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,9 +41,6 @@ namespace CustomerApp.Repository.Migrations
 
                     b.Property<int>("Number")
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("State")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("Street")
                         .HasColumnType("TEXT");
