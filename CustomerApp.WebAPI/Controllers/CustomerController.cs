@@ -40,12 +40,12 @@ namespace CustomerApp.WebAPI.Controllers
             return BadRequest("Não foi possível salvar as informações");
         }
 
-        [HttpPut("{customerId}")]
-        public async Task<IActionResult> UpdateCustomer(int customerId, Customer customer)
+        [HttpPut]
+        public async Task<IActionResult> UpdateCustomer(Customer customer)
         {
             try
             {
-                var customerAux = await _repo.GetCustomerByIdAsync(customerId, false);
+                var customerAux = await _repo.GetCustomerByIdAsync(customer.Id, false);
 
                 if (customerAux == null)
                 {
@@ -62,7 +62,7 @@ namespace CustomerApp.WebAPI.Controllers
 
                     if (await _repo.SaveChangesAsync())
                     {
-                        return Created($"api/[controller]/{customerAux.Id}", customerAux);
+                        return Ok(customerAux);
                     }
                 }
             }
