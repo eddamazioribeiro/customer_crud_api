@@ -29,7 +29,7 @@ namespace CustomerApp.WebAPI.Controllers
 
                 if (await _repo.SaveChangesAsync())
                 {
-                    return Created($"api/[controller]/{customer.Id}", customer);
+                    return Ok(customer);
                 }
             }
             catch (System.Exception ex)
