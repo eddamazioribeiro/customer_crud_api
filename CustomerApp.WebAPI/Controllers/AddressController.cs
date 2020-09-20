@@ -59,6 +59,7 @@ namespace CustomerApp.WebAPI.Controllers
                     addressAux.ZipCode = address.ZipCode;
                     addressAux.Complement = address.Complement;
                     addressAux.City = address.City;
+                    addressAux.State = address.State;
                     addressAux.MainAddress = address.MainAddress;
                     addressAux.UpdatedAt = DateTime.Now;
 
