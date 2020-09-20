@@ -41,12 +41,12 @@ namespace CustomerApp.WebAPI.Controllers
             return BadRequest("Não foi possível salvar as informações");
         }
 
-        [HttpPut("{addressId}")]
-        public async Task<IActionResult> UpdateAddress(int addressId, Address address)
+        [HttpPut]
+        public async Task<IActionResult> UpdateAddress(Address address)
         {
             try
             {
-                var addressAux = await _repo.GetAddressByIdAsync(addressId);
+                var addressAux = await _repo.GetAddressByIdAsync(address.Id);
 
                 if (addressAux == null)
                 {
@@ -123,7 +123,7 @@ namespace CustomerApp.WebAPI.Controllers
             }
         }
 
-        [HttpGet("customer/list/{customerId?}")]
+        [HttpGet("list/{customerId?}")]
         public async Task<IActionResult> ListAllAddressesAsync(int? customerId)
         {
             try
